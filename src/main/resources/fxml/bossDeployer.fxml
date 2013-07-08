@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" minHeight="550.0" minWidth="800.0" prefHeight="550.0" prefWidth="800.0" styleClass="background" xmlns:fx="http://javafx.com/fxml" fx:controller="com.finzsoft.BossDeployerController">
+  <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="80.0" prefWidth="800.0">
+    <children>
+      <ImageView fitHeight="80.0" fitWidth="801.9999389648438" layoutX="0.0" layoutY="0.0" pickOnBounds="true" preserveRatio="false">
+        <image>
+          <Image url="@../images/likeaboss.jpg" />
+        </image>
+      </ImageView>
+    </children>
+  </AnchorPane>
+  <Accordion layoutX="0.0" layoutY="80.0" prefHeight="470.0" prefWidth="802.0">
+    <expandedPane>
+      <TitledPane fx:id="x1" animated="true" text="Configuration">
+        <content>
+          <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+              <SplitPane dividerPositions="0.5503778337531486" focusTraversable="true" layoutX="-3.0" layoutY="0.0" prefHeight="400.0" prefWidth="796.0">
+                <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="487.0">
+                    <children>
+                      <Label layoutX="32.0" layoutY="51.0" prefHeight="21.0" text="War Location" />
+                      <TextField fx:id="warLocationField" layoutX="130.0" layoutY="49.0" prefHeight="24.0" prefWidth="200.0" />
+                      <Button fx:id="chooseWarBtn" layoutX="336.0" layoutY="49.0" mnemonicParsing="false" text="choose" onAction="#chooseWar"/>
+                      <Label layoutX="32.0" layoutY="107.0" prefHeight="21.0" text="Tomcat Dir" />
+                      <TextField fx:id="tomcatDirField" layoutX="130.0" layoutY="105.0" prefHeight="24.0" prefWidth="200.0" />
+                      <Button fx:id="chooseDirBtn" layoutX="336.0" layoutY="105.0" mnemonicParsing="false" text="choose" />
+                      <CheckBox fx:id="backUpOldWarCheck" layoutX="32.0" layoutY="284.0" mnemonicParsing="false" text="Backup Old War" />
+                      <CheckBox fx:id="removeBackupLogsCheck" layoutX="32.0" layoutY="328.0" mnemonicParsing="false" text="Remove and Backup Old Logs" />
+                      <Group id="Group" layoutX="33.0" layoutY="194.0" />
+                      <ToggleButton fx:id="freshDeployToggle" alignment="CENTER" layoutX="32.0" layoutY="231.0" mnemonicParsing="false" text="Fresh Deployment">
+                        <effect>
+                          <DropShadow color="#7433ff" />
+                        </effect>
+                      </ToggleButton>
+                      <TextField fx:id="contextNameField" layoutX="130.0" layoutY="163.0" prefWidth="200.0" />
+                      <Label layoutX="32.0" layoutY="169.0" text="Context Name" />
+                      <ComboBox fx:id="contextCombo" layoutX="336.0" layoutY="157.0" visible="false">
+                        <items>
+                          <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Item 1" />
+                            <String fx:value="Item 2" />
+                            <String fx:value="Item 3" />
+                          </FXCollections>
+                        </items>
+                      </ComboBox>
+                    </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                      <Label layoutX="14.0" layoutY="53.0" text="War Info" />
+                      <Label layoutX="77.0" layoutY="77.0" text="Version:" />
+                      <Label layoutX="77.0" layoutY="105.0" text="Size:" />
+                      <TextField fx:id="warVersion" editable="false" layoutX="137.0" layoutY="74.0" prefWidth="196.0" />
+                      <TextField fx:id="warSize" editable="false" layoutX="137.0" layoutY="105.0" prefWidth="196.0" />
+                      <Label layoutX="18.0" layoutY="162.0" text="Tomcat Info" />
+                      <Label layoutX="81.0" layoutY="186.0" text="Version:" />
+                      <Label layoutX="81.0" layoutY="214.0" text="Service Name:" />
+                      <TextField fx:id="tomcatVersion" editable="false" layoutX="185.0" layoutY="183.0" prefWidth="152.0" />
+                      <TextField fx:id="tomcatServiceName" editable="false" layoutX="184.0" layoutY="214.0" prefWidth="153.0" />
+                      <Label layoutX="81.0" layoutY="248.0" text="Port:" />
+                      <TextField fx:id="tomcatPort" editable="false" layoutX="184.0" layoutY="248.0" prefWidth="153.0" />
+                      <Button fx:id="confirmBtn" layoutX="254.0" layoutY="348.0" mnemonicParsing="false" text="Confirm" />
+                      <Label layoutX="18.0" layoutY="297.0" text="Summary" />
+                      <TextArea fx:id="summary" editable="false" layoutX="48.0" layoutY="321.0" prefHeight="54.0" prefWidth="200.0" wrapText="true" />
+                    </children>
+                  </AnchorPane>
+                </items>
+              </SplitPane>
+            </children>
+          </AnchorPane>
+        </content>
+        <font>
+          <Font name="System Bold Italic" size="20.0" fx:id="x2" />
+        </font>
+      </TitledPane>
+    </expandedPane>
+    <panes>
+      <fx:reference source="x1" />
+      <TitledPane animated="true" font="$x2" text="Execution">
+        <content>
+          <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+              <ScrollPane hbarPolicy="NEVER" prefHeight="400.0" prefWidth="796.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <content>
+                  <TextArea fx:id="logArea" prefHeight="391.0" prefWidth="796.0" wrapText="true" />
+                </content>
+              </ScrollPane>
+            </children>
+          </AnchorPane>
+        </content>
+      </TitledPane>
+    </panes>
+  </Accordion>
+</AnchorPane>

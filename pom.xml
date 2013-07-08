@@ -78,14 +78,11 @@
 
     <dependencies>
 
-        <!-- MigLayout -->
-
         <dependency>
-            <groupId>com.miglayout</groupId>
-            <artifactId>miglayout-javafx</artifactId>
-            <version>4.2</version>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.9.1</version>
         </dependency>
-
         <!-- Apache Commons -->
 
         <dependency>
