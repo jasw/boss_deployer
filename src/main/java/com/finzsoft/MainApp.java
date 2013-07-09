@@ -17,15 +17,16 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         Application.launch(MainApp.class, (java.lang.String[])null);
+        Environment.getInstance().prepareEnvironment();
     }
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            AnchorPane page = (AnchorPane) FXMLLoader.load(MainApp.class.getResource("/fxml/bossDeployer.fxml"));
+            AnchorPane page = FXMLLoader.load(MainApp.class.getResource("/fxml/bossDeployer.fxml"));
             Scene scene = new Scene(page);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Issue Tracking Sample");
+            primaryStage.setTitle("BOSS DEPLOYER");
             primaryStage.show();
         } catch (Exception ex) {
             log.error("Error starting up:",ex);
