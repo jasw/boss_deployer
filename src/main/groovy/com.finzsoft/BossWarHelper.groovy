@@ -12,7 +12,7 @@ class BossWarHelper {
 
         def warFile = new File(path)
         def size = warFile.size()
-        def unzippedLocation = Environment.TMP+File.separator+new Date().format("yyyy-MM-DD-HH-mm")
+        def unzippedLocation = Environment.TMP+File.separator+new Date().format("yyyy-MM-dd-HH-mm")
         def version = ""
         def info = new BossWarInfo()
         info.setSizeInMB(size/(1024*1024))

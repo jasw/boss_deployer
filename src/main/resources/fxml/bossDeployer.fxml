@@ -33,11 +33,11 @@
                     <children>
                       <Label layoutX="32.0" layoutY="51.0" prefHeight="21.0" text="War Location" />
                       <TextField fx:id="warLocationField" layoutX="130.0" layoutY="49.0" prefHeight="24.0" prefWidth="200.0" />
-                      <Button fx:id="chooseWarBtn" layoutX="336.0" layoutY="49.0" mnemonicParsing="false" text="choose" onAction="#chooseWar"/>
+                      <Button fx:id="chooseWarBtn" layoutX="336.0" layoutY="49.0" mnemonicParsing="false" onAction="#chooseWar" text="choose" />
                       <Label layoutX="32.0" layoutY="107.0" prefHeight="21.0" text="Tomcat Dir" />
                       <TextField fx:id="tomcatDirField" layoutX="130.0" layoutY="105.0" prefHeight="24.0" prefWidth="200.0" />
-                      <Button fx:id="chooseDirBtn" layoutX="336.0" layoutY="105.0" mnemonicParsing="false" text="choose" />
-                      <CheckBox fx:id="backUpOldWarCheck" layoutX="32.0" layoutY="284.0" mnemonicParsing="false" text="Backup Old War" />
+                      <Button fx:id="chooseDirBtn" layoutX="336.0" layoutY="105.0" mnemonicParsing="false" onAction="#chooseTCDir" text="choose" />
+                      <CheckBox fx:id="backUpOldWarCheck" layoutX="32.0" layoutY="285.0" mnemonicParsing="false" text="Backup Old War" />
                       <CheckBox fx:id="removeBackupLogsCheck" layoutX="32.0" layoutY="328.0" mnemonicParsing="false" text="Remove and Backup Old Logs" />
                       <Group id="Group" layoutX="33.0" layoutY="194.0" />
                       <ToggleButton fx:id="freshDeployToggle" alignment="CENTER" layoutX="32.0" layoutY="231.0" mnemonicParsing="false" text="Fresh Deployment">
@@ -60,21 +60,21 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                      <Label layoutX="14.0" layoutY="53.0" text="War Info" />
-                      <Label layoutX="77.0" layoutY="77.0" text="Version:" />
-                      <Label layoutX="77.0" layoutY="105.0" text="Size:" />
-                      <TextField fx:id="warVersion" editable="false" layoutX="137.0" layoutY="74.0" prefWidth="196.0" />
-                      <TextField fx:id="warSize" editable="false" layoutX="137.0" layoutY="105.0" prefWidth="196.0" />
-                      <Label layoutX="18.0" layoutY="162.0" text="Tomcat Info" />
-                      <Label layoutX="81.0" layoutY="186.0" text="Version:" />
-                      <Label layoutX="81.0" layoutY="214.0" text="Service Name:" />
-                      <TextField fx:id="tomcatVersion" editable="false" layoutX="185.0" layoutY="183.0" prefWidth="152.0" />
-                      <TextField fx:id="tomcatServiceName" editable="false" layoutX="184.0" layoutY="214.0" prefWidth="153.0" />
-                      <Label layoutX="81.0" layoutY="248.0" text="Port:" />
-                      <TextField fx:id="tomcatPort" editable="false" layoutX="184.0" layoutY="248.0" prefWidth="153.0" />
-                      <Button fx:id="confirmBtn" layoutX="254.0" layoutY="348.0" mnemonicParsing="false" text="Confirm" />
-                      <Label layoutX="18.0" layoutY="297.0" text="Summary" />
-                      <TextArea fx:id="summary" editable="false" layoutX="48.0" layoutY="321.0" prefHeight="54.0" prefWidth="200.0" wrapText="true" />
+                      <Label layoutX="14.0" layoutY="50.0" text="War Info" />
+                      <Label layoutX="77.0" layoutY="67.0" text="Version:" />
+                      <Label layoutX="79.0" layoutY="101.0" text="Size:" />
+                      <TextField fx:id="warVersion" editable="false" layoutX="137.0" layoutY="65.0" prefWidth="196.0" />
+                      <TextField fx:id="warSize" editable="false" layoutX="137.0" layoutY="99.0" prefWidth="196.0" />
+                      <Label layoutX="18.0" layoutY="140.0" text="Tomcat Info" />
+                      <Label layoutX="81.0" layoutY="165.0" text="Version:" />
+                      <Label layoutX="81.0" layoutY="195.0" text="Service Name:" />
+                      <TextField fx:id="tomcatVersion" editable="false" layoutX="185.0" layoutY="161.0" prefWidth="152.0" />
+                      <TextField fx:id="tomcatServiceName" editable="false" layoutX="184.0" layoutY="191.0" prefWidth="153.0" />
+                      <Label layoutX="81.0" layoutY="223.0" text="Port:" />
+                      <TextField fx:id="tomcatPort" editable="false" layoutX="184.0" layoutY="219.0" prefWidth="153.0" />
+                      <Button fx:id="confirmBtn" layoutX="254.0" layoutY="354.0" mnemonicParsing="false" text="Confirm" />
+                      <Label layoutX="18.0" layoutY="266.0" text="Summary" />
+                      <TextArea fx:id="summary" editable="false" layoutX="48.0" layoutY="291.0" prefHeight="54.0" prefWidth="285.0" wrapText="true" />
                     </children>
                   </AnchorPane>
                 </items>

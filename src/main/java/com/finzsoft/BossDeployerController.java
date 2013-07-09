@@ -1,14 +1,19 @@
 package com.finzsoft;
 
 import com.finzsoft.model.BossWarInfo;
+import com.finzsoft.model.TomcatInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.text.DecimalFormat;
 
 /**
  * Created by jasonwang on 8/07/13.
@@ -78,7 +83,8 @@ public class BossDeployerController {
         if (chosenFile != null) {
             path = chosenFile.getPath();
             BossWarInfo warInfo = new BossWarHelper().getBossWarInfoFromFile(path);
-            warSize.setText(warInfo.getSizeInMB()+" MB");
+            DecimalFormat df = new DecimalFormat("###.##");
+            warSize.setText(df.format(warInfo.getSizeInMB())+" MB");
             warVersion.setText(warInfo.getVersion());
         } else {
             //default return value
@@ -87,5 +93,23 @@ public class BossDeployerController {
         warLocationField.setText(path);
     }
 
+    @FXML
+    public void chooseTCDir(ActionEvent actionEvent) {
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle("Select where Tomcat is installed");
+        File defaultDirectory = new File(".");
+        chooser.setInitialDirectory(defaultDirectory);
+        Window window = ((Node) (actionEvent.getTarget())).getScene().getWindow();
+        File selectedDirectory = chooser.showDialog(window);
+        if(selectedDirectory!=null){
+            String absolutePath = selectedDirectory.getAbsolutePath();
+            tomcatDirField.setText(absolutePath);
+            TomcatInfo tomcatInfo = new TomcatHelper().getTomcatInfo(absolutePath);
+            log.info("Tomcat has info:"+tomcatInfo);
+            tomcatPort.setText(tomcatInfo.getPort());
+            tomcatVersion.setText(tomcatInfo.getVersion());
+            tomcatServiceName.setText(tomcatInfo.getWindowsServiceName());
 
+        }
+    }
 }
