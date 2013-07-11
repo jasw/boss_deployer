@@ -61,4 +61,12 @@ class TomcatHelper {
         return tomcatInfo
 
     }
+
+    String stopTomcat(String hostName, String serviceName){
+        def reply = "scripts/sc-stop.bat ${hostName}${serviceName}".execute().text
+    }
+
+    String startTomcat(String hostName, String serviceName){
+        "scripts/sc-start.bat ${hostName}${serviceName}".execute().text
+    }
 }

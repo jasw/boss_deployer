@@ -160,7 +160,7 @@ public class BossDeployerController {
 
 
     public void showSummary(ActionEvent actionEvent) {
-        String firstLineHolder = "You will deploy %s of version %s into Tomcat at machine %, location %s under the context name: %s ";
+        String firstLineHolder = "You will deploy %s of version %s into Tomcat at machine %s, location %s under the context name: %s ";
         String warLoc = warLocationField.getText();
         String warName = "";
         if(warLoc!=null){
@@ -182,7 +182,22 @@ public class BossDeployerController {
 
     public void confirm(ActionEvent actionEvent) {
         accordion.setExpandedPane(executionPane);
-        logArea.appendText("Stopping tomcat...");
+        String serviceName = tomcatServiceName.getText();
+        String hostName = hostNameField.getText();
+        progressBar.setProgress(0.10);
+        logArea.appendText("Stopping "+serviceName+" at machine "+hostName);
+        TomcatHelper tomcatHelper = new TomcatHelper();
+        String result = tomcatHelper.stopTomcat(hostName, serviceName);
+        logArea.appendText(result);
+        String warLoc = warLocationField.getText();
+        logArea.appendText("Deploying "+  warLoc.substring(warLoc.lastIndexOf(File.separatorChar)));
+        progressBar.setProgress(0.50);
+        logArea.appendText("Backing up logs and existing war");
+        progressBar.setProgress(0.80);
+        logArea.appendText("Starting "+serviceName);
+        String res = tomcatHelper.startTomcat(hostName, serviceName);
+        logArea.appendText(res);
+
     }
 
     public void remoteDeployChecked(ActionEvent actionEvent) {
