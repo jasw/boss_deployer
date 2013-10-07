@@ -63,10 +63,11 @@ class TomcatHelper {
     }
 
     String stopTomcat(String hostName, String serviceName){
-        def reply = "scripts/sc-stop.bat ${hostName}${serviceName}".execute().text
+        println "cmd /c echo %CD%".execute().text
+         ("cmd /c scripts"+File.separator+ "sc-stop.bat "+"${hostName} ${serviceName}").execute().text
     }
 
     String startTomcat(String hostName, String serviceName){
-        "scripts/sc-start.bat ${hostName}${serviceName}".execute().text
+        ("cmd /c scripts"+File.separator+ "sc-start.bat "+"${hostName} ${serviceName}").execute().text
     }
 }

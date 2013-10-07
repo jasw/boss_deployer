@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,7 @@ public class BossDeployerController {
     public TextField hostNameField;
     @FXML
     public Label hostNameLabel;
+    public TextField newField;
 
 
     @FXML
@@ -98,7 +100,7 @@ public class BossDeployerController {
         //Make sure a file was selected, if not return default
         String path;
         if (chosenFile != null) {
-            path = chosenFile.getPath();
+            path = chosenFile.getAbsolutePath();
             BossWarInfo warInfo = new BossWarHelper().getBossWarInfoFromFile(path);
             DecimalFormat df = new DecimalFormat("###.##");
             warSize.setText(df.format(warInfo.getSizeInMB())+" MB");
@@ -111,11 +113,11 @@ public class BossDeployerController {
     }
 
     @FXML
-    public void chooseTCDir(ActionEvent actionEvent) {
+    public void chooseTCDir(ActionEvent actionEvent) throws IOException {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Select where Tomcat is installed");
         File defaultDirectory = new File(".");
-        chooser.setInitialDirectory(defaultDirectory);
+        chooser.setInitialDirectory(defaultDirectory.getCanonicalFile());
         Window window = ((Node) (actionEvent.getTarget())).getScene().getWindow();
         File selectedDirectory = chooser.showDialog(window);
         if(selectedDirectory!=null){
@@ -129,14 +131,14 @@ public class BossDeployerController {
             if(tomcatInfo.getContextLists() != null){
                 List contexts = new ArrayList();
                 contexts.add("None");
-                contexts.add(tomcatInfo.getContextLists());
+                contexts.addAll(tomcatInfo.getContextLists());
                 contextCombo.setItems(FXCollections.observableArrayList(contexts));
                 contextCombo.setVisible(true);
                 contextCombo.setPromptText("Pick an existing context to deploy to");
             }else if(tomcatInfo.getWarFiles()!=null){
                 List wars = new ArrayList();
                 wars.add("None");
-                wars.add(tomcatInfo.getWarFiles());
+                wars.addAll(tomcatInfo.getWarFiles());
                 contextCombo.setItems(FXCollections.observableArrayList(wars));
                 contextCombo.setVisible(true);
                 contextCombo.setPromptText("Pick an existing war to replace");
@@ -166,7 +168,7 @@ public class BossDeployerController {
         if(warLoc!=null){
             warName = warLoc.substring(warLoc.lastIndexOf(File.separatorChar));
         }
-        String firstLine = String.format(firstLineHolder, warName, warVersion.getText(), tomcatDirField.getText(), contextNameField.getText());
+        String firstLine = String.format(firstLineHolder, warName, warVersion.getText(),hostNameField.getText(), tomcatDirField.getText(), contextNameField.getText());
         summary.appendText(firstLine);
         if(backUpOldWarCheck.isSelected()){
             summary.appendText("Previous version of the war will be backed up in /backup/war folder.");
@@ -185,17 +187,18 @@ public class BossDeployerController {
         String serviceName = tomcatServiceName.getText();
         String hostName = hostNameField.getText();
         progressBar.setProgress(0.10);
-        logArea.appendText("Stopping "+serviceName+" at machine "+hostName);
+        logArea.appendText("Stopping "+serviceName+" at machine "+hostName+"\n");
         TomcatHelper tomcatHelper = new TomcatHelper();
         String result = tomcatHelper.stopTomcat(hostName, serviceName);
-        logArea.appendText(result);
+        logArea.appendText(result+"\n");
         String warLoc = warLocationField.getText();
-        logArea.appendText("Deploying "+  warLoc.substring(warLoc.lastIndexOf(File.separatorChar)));
+        logArea.appendText("Deploying "+  warLoc.substring(warLoc.lastIndexOf(File.separatorChar))+"\n");
         progressBar.setProgress(0.50);
-        logArea.appendText("Backing up logs and existing war");
+        logArea.appendText("Backing up logs and existing war"+"\n");
         progressBar.setProgress(0.80);
-        logArea.appendText("Starting "+serviceName);
+        logArea.appendText("Starting "+serviceName+"\n");
         String res = tomcatHelper.startTomcat(hostName, serviceName);
+        progressBar.setProgress(1);
         logArea.appendText(res);
 
     }
@@ -203,5 +206,8 @@ public class BossDeployerController {
     public void remoteDeployChecked(ActionEvent actionEvent) {
         hostNameField.setVisible(remoteCheck.isSelected());
         hostNameLabel.setVisible(remoteCheck.isSelected());
+    }
+
+    public void onClick(ActionEvent actionEvent) {
     }
 }

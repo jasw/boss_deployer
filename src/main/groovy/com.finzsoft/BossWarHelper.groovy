@@ -22,11 +22,20 @@ class BossWarHelper {
         def ant = new AntBuilder()
         println "extracting $path into $unzippedLocation"
         ant.unzip(src:path,dest:unzippedLocation)
+        def unzippedCommonUtilDir;
         new File(unzippedLocation).eachFileRecurse {file->
-            if(file.name == "release.version"){
-                version = file.getText("UTF-8");
+            if(file.name.contains( "SovSE_Common_Util")){
+                unzippedCommonUtilDir = unzippedLocation + File.separator + file.getName()
+                ant.unzip(src:file.getAbsolutePath(), dest: unzippedCommonUtilDir)
             }
         }
+        while(!new File(unzippedCommonUtilDir).exists()){
+            //wait for half a sec.
+            Thread.sleep(500)
+        }
+        def versionFileText = new File(unzippedCommonUtilDir+File.separator+"version.properties").text
+        version = versionFileText.substring(versionFileText.lastIndexOf("=")+1)
+
         info.setVersion(version)
         return info;
 

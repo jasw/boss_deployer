@@ -32,7 +32,7 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="487.0">
                     <children>
                       <Label layoutX="32.0" layoutY="51.0" prefHeight="21.0" text="War Location" />
-                      <TextField fx:id="warLocationField" layoutX="130.0" layoutY="49.0" prefHeight="24.0" prefWidth="200.0" />
+                      <TextField fx:id="warLocationField" layoutX="130.0" layoutY="49.0" prefHeight="24.0" prefWidth="200.0" onAction="#onClick" />
                       <Button fx:id="chooseWarBtn" layoutX="336.0" layoutY="49.0" mnemonicParsing="false" onAction="#chooseWar" text="choose" />
                       <Label layoutX="32.0" layoutY="95.0" prefHeight="21.0" text="Tomcat Dir" />
                       <TextField fx:id="tomcatDirField" layoutX="130.0" layoutY="93.0" prefHeight="24.0" prefWidth="200.0" />
@@ -59,6 +59,7 @@
                       <Label layoutX="32.0" layoutY="140.0" text="Found  Context" />
                       <CheckBox fx:id="remoteCheck" layoutX="33.0" layoutY="235.0" mnemonicParsing="false" onAction="#remoteDeployChecked" text="Remote" />
                       <TextField fx:id="hostNameField" layoutX="214.0" layoutY="235.0" prefHeight="25.0" prefWidth="200.0" text="localhost" visible="false" />
+
                       <Label fx:id="hostNameLabel" layoutX="141.0" layoutY="239.0" text="Host Name:" visible="false" />
                     </children>
                   </AnchorPane>
